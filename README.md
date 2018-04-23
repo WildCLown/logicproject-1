@@ -1,2 +1,2 @@
 # logicproject
-Logic project com dos xarás
+Logic project dos xarás
