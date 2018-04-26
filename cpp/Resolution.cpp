@@ -20,11 +20,6 @@ int main(){
         if(metod=="TT"){
             //processar frase aqui
 
-
-
-
-
-
             truetable<<frase<<endl;
         }else{//RE
             //processar frase aqui
@@ -35,6 +30,7 @@ int main(){
             }else{
                 vector <int> clauses[clausesQuantity];//array de listas onde colocarei as clausulas
                 //percorrer de novo aqui para pegar as clauslas
+                resolution<<"está na FNC e contém "<<clausesQuantity<<" cláusulas"<<endl;
             }
         }
     }
@@ -47,11 +43,9 @@ int isFNC(string frase){
     for(int i=0;i<frase.size();i++){
         if(frase[i]==' '){
             //do nothing
-        }
-        else if(frase[i]=='('){
+        }else if(frase[i]=='('){
             lv++;
-        }
-        else if(frase[i]==')'){//conta uma clausula
+        }else if(frase[i]==')'){//conta uma clausula
             lv--; q++;
         }else if(lv==0 && frase[i]!='&'){//significa está fora das clausulas e o operador está errado
             return -1;
