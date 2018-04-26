@@ -2,9 +2,12 @@
 using namespace std;
 int isFNC(string frase);
 int encode(char literal);
+bool getClauses(string frase);
+void printclauses();
 string metod,frase;
 fstream input,truetable,resolution;//variaveis para o imput e o output
 int t,clausesQuantity;
+vector <vector<int>> clauses;
 int main(){
     input.open("Entrada.in");
     truetable.open("Tabela.out");
@@ -28,9 +31,14 @@ int main(){
             if(clausesQuantity==-1){
                 resolution<<"Não está na FNC.\n";
             }else{
-                vector <int> clauses[clausesQuantity];//array de listas onde colocarei as clausulas
-                //percorrer de novo aqui para pegar as clauslas
-                resolution<<"está na FNC e contém "<<clausesQuantity<<" cláusulas"<<endl;
+                if(!getClauses(frase)){
+                    resolution<<"Nem todas as cláusulas são de horn."<<endl;
+                }else{
+                    //solve here
+                    printclauses();
+                }
+                
+                
             }
         }
     }
@@ -65,4 +73,51 @@ int encode(char literal){
         return 3;
     if(literal =='S')
         return 4;
+}
+bool getClauses(string frase){//pega clausulas, poe no vector e retorna false de alguma das clausulas nao for de horn
+    char c;
+    int contador;
+    stringstream frasestream(frase);
+    vector<int> clause;
+    clauses.clear();
+    for(int i=0;i<frase.size();i++){
+        frasestream>>c;
+        if(c=='('){//get clause
+            clause.clear();
+        }else if(c==')'){//close clause
+            clauses.push_back(clause);
+            clause.clear();
+        }else{//get p q r s
+            if(c=='~'){
+                frasestream>>c;i++;
+                clause.push_back(-1*encode(c));
+            }else if(c!='v'){//if is p q r or s
+                clause.push_back(encode(c));
+            }
+        }
+
+    }
+    for(int i=0;i<clausesQuantity;i++){
+        contador=0;
+        for(int j=0;j<clauses[i].size() && !clauses[i].empty();j++){
+            if(clauses[i][j]>0)
+                contador++;
+        }
+        if(contador>1)//tal clausla nao é de horn
+            return false;
+    }
+
+return true;
+}
+void printclauses(){
+    for(int i=0;i<clausesQuantity;i++){
+        for(int j=0;j<clauses[i].size() && !clauses[i].empty();j++){
+            cout<<clauses[i][j]<<" ";
+            resolution<<clauses[i][j]<<" ";
+        }
+        cout<<endl;
+        resolution<<endl;
+    }cout<<endl;
+    resolution<<endl;
+
 }

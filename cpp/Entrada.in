@@ -1,4 +1,4 @@
-7
+8
 TT (P > ((~Q) < (Q < S)))
 RE (P v ~P v (~S > ~Q) v ~R) & (~R v ~Q) & (~P v (Q > ~R))
 RE (P v ~Q) & (Q v ~R) & (~P) & (~R)
@@ -6,4 +6,5 @@ TT (P & (~P))
 TT (R v (~Q))
 RE (P v ~S) & (~P) & (S)
 RE (P v Q v R) & (~P v ~R)
+RE  (P v Q v R)     & (   ~P v ~R) & (S)
 
