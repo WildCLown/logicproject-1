@@ -1,6 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 int isFNC(string frase);
+int encode(char literal);
 string metod,frase;
 fstream input,truetable,resolution;//variaveis para o imput e o output
 int t,clausesQuantity;
@@ -16,27 +17,30 @@ int main(){
         input>>metod;//pega TT ou RE
         getline(input, frase);//pega o resto da linha
 
-        if(metod=="TT"){//printar na Tabela.out
+        if(metod=="TT"){
             //processar frase aqui
+
+
+
+
+
+
             truetable<<frase<<endl;
-        }else{//printar na Resolucao.out
+        }else{//RE
             //processar frase aqui
             resolution<<frase<<endl;
             clausesQuantity = isFNC(frase);//retorna quantidade de clausulas ou -1 se nao estiver na FNC
             if(clausesQuantity==-1){
                 resolution<<"Não está na FNC.\n";
             }else{
-
+                vector <int> clauses[clausesQuantity];//array de listas onde colocarei as clausulas
+                //percorrer de novo aqui para pegar as clauslas
             }
         }
     }
-
-
-
-
-
     return 0;
 }
+
 int isFNC(string frase){
     int q=0;//quantidade de clausulas
     int lv=0;//significa o quao dentro da expressao original o algoritmo está
@@ -54,8 +58,17 @@ int isFNC(string frase){
         }else if(lv>0 && frase[i]!='~' && frase[i]!='P' && frase[i]!='Q' && frase[i]!='R' && frase[i]!='S' && frase[i]!='v'){//significa que existe algo invalido dentro de clausulas
             return -1;
         }
-
-
     }
     return q;
+}
+
+int encode(char literal){
+    if(literal=='P')
+        return 1;
+    if(literal =='Q')
+        return 2;
+    if(literal =='R')
+        return 3;
+    if(literal =='S')
+        return 4;
 }
