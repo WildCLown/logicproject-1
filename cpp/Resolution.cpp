@@ -1,5 +1,6 @@
 #include <bits/stdc++.h>
 using namespace std;
+//resolution functions and global variables/////////////////
 int isFNC(string frase);
 int encode(char literal);
 bool getClauses(string frase);
@@ -8,6 +9,7 @@ string metod,frase;
 fstream input,truetable,resolution;//variaveis para o imput e o output
 int t,clausesQuantity;
 vector <vector<int>> clauses;
+/////////////////////////////////////////////////////////////////////////////
 int main(){
     input.open("Entrada.in");
     truetable.open("Tabela.out");
@@ -45,6 +47,9 @@ int main(){
     return 0;
 }
 
+
+
+//////////////////////////////resolution functions//////////////////////
 int isFNC(string frase){
     int q=0;//quantidade de clausulas
     int lv=0;//significa o quao dentro da expressao original o algoritmo está
@@ -109,7 +114,7 @@ bool getClauses(string frase){//pega clausulas, poe no vector e retorna false de
 
 return true;
 }
-void printclauses(){
+void printclauses(){//print in console and in Resolucao.out
     for(int i=0;i<clausesQuantity;i++){
         for(int j=0;j<clauses[i].size() && !clauses[i].empty();j++){
             cout<<clauses[i][j]<<" ";
@@ -121,3 +126,4 @@ void printclauses(){
     resolution<<endl;
 
 }
+/////////////////////////////////////////////////////////////////////
