@@ -1,4 +1,5 @@
  (P v ~P v (~S > ~Q) v ~R) & (~R v ~Q) & (~P v (Q > ~R))
+Não está na FNC.
  (P v ~Q) & (Q v ~R) & (~P) & (~R)
  (P v ~S) & (~P) & (S)
  (P v Q v R) & (~P v ~R)
