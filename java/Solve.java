@@ -1,4 +1,3 @@
-
 public class Solve {
 	public static void main(String[] args) {
 		boolean[] well = { true, false, true, true };
@@ -25,15 +24,16 @@ public class Solve {
 		}
 		boolean check[] = new boolean[i];
 		int k = (int) Math.pow(2, i);
-		for (int j = 0; j < i; j++) {
-
-			for (int p = 0; p < i; p++) {
-				if (check[(i - 1) - p] == true) {
-					check[(i - 1) - p] = false;
-				}
-				if (check[(i - 1) - p] == false) {
-					check[(i - 1) - p] = true;
-					break;
+		for (int j = 0; j < k; j++) {
+			System.out.println(Arrays.toString(check));
+			if(j != k-1) {
+				for (int p = 0; p < i; p++) {
+					if (check[(i - 1) - p] == true) {
+						check[(i - 1) - p] = false;
+					} else if (check[(i - 1) - p] == false) {
+						check[(i - 1) - p] = true;
+						break;
+					}
 				}
 			}
 		}
