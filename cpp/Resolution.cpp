@@ -126,31 +126,29 @@ bool solveHorn(){
     bool sat=true,erased;
     for(int i=0;i<clauses.size();i++){
         if(clauses[i].size()==1){
-            units.push(i);
+            units.push(clauses[i][0]);
         }
     }//clausulas unitarias iniciais guardadas
 
     while(!units.empty() && sat){
-        int pos=units.front();//posicao de uma clausula unitaria
-        int u = clauses[pos][0];//variavel da clausula unitaria
+        
+        int u = units.front();//variavel de clausula unitaria
         units.pop();
-        if(problema==10)
-        printclauses();
+        //if(problema==49)//choose problem to debug
+        //printclauses();//for debug purposes
         for(int i=0;i<clauses.size() && sat;i++){
-            if(i!=pos){//significa que está olhando uma clausula diferente da clausula de onde u foi copiada
+            if(clauses[i].size()!=1 || (clauses[i].size()==1 && clauses[i][0]!=u)){//significa que está olhando uma clausula diferente da clausula de onde u foi copiada
                 erased=false;
                 for(int j=0;j<clauses[i].size() && !erased && sat;j++){
                     if(clauses[i][j]==u){//se encontrar o proprio u dentro de outra clausula
                         clauses.erase(clauses.begin()+i);//apaga clausula cujo indice é i
                         erased=true;//para o loop
-                        if(pos>i)
-                            pos--;//reposiciona clausula unitaria atual
                         i=0;
                     }else if(clauses[i][j]==-u && clauses[i].size()>1){
                         clauses[i].erase(clauses[i].begin()+j);//apaga variavel negada
                         j=0;
                         if(clauses[i].size()==1){//virou clausula unitaria
-                            units.push(i);//coloca clausula unitaria na fila
+                            units.push(clauses[i][0]);//coloca clausula unitaria na fila
                         }
 
                     }else if(clauses[i][j]==-u){//quer dizer q existem as clausulas (u)&(-u)
