@@ -5,9 +5,10 @@ int isFNC(string frase);
 int encode(char literal);
 bool getClauses(string frase);
 void printclauses();
+bool solveHorn();
 string metod,frase;
 fstream input,truetable,resolution;//variaveis para o imput e o output
-int t,clausesQuantity;
+int t,clausesQuantity,problema;
 vector <vector<int>> clauses;
 /////////////////////////////////////////////////////////////////////////////
 int main(){
@@ -18,26 +19,32 @@ int main(){
     
     input>>t;//pega quantidade de casos testes
     while(t--){//roda t vezes
-    
+        problema++;
         input>>metod;//pega TT ou RE
         getline(input, frase);//pega o resto da linha
 
         if(metod=="TT"){
             //processar frase aqui
-
+            truetable<<"Problema #"<<problema<<endl;
             truetable<<frase<<endl;
         }else{//RE
             //processar frase aqui
-            resolution<<frase<<endl;
+            resolution<<"Problema #"<<problema<<endl;
             clausesQuantity = isFNC(frase);//retorna quantidade de clausulas ou -1 se nao estiver na FNC
             if(clausesQuantity==-1){
-                resolution<<"Não está na FNC.\n";
+                resolution<<"Não está na FNC.\n\n";
             }else{
                 if(!getClauses(frase)){
-                    resolution<<"Nem todas as cláusulas são de horn."<<endl;
+                    resolution<<"Nem todas as cláusulas são de Horn.\n\n";
                 }else{
                     //solve here
-                    printclauses();
+                    //printclauses();
+                    if(solveHorn()){
+                       resolution<<"Sim, é satisfatível.\n\n"; 
+                    }else{
+                        resolution<<"Não, não é satisfatível.\n\n";
+                    }
+                    
                 }
                 
                 
@@ -113,6 +120,52 @@ bool getClauses(string frase){//pega clausulas, poe no vector e retorna false de
     }
 
 return true;
+}
+bool solveHorn(){
+    queue <int> units;//guarda indices de clausulas unitarias
+    bool sat=true,erased;
+    for(int i=0;i<clauses.size();i++){
+        if(clauses[i].size()==1){
+            units.push(i);
+        }
+    }//clausulas unitarias iniciais guardadas
+
+    while(!units.empty() && sat){
+        int pos=units.front();//posicao de uma clausula unitaria
+        int u = clauses[pos][0];//variavel da clausula unitaria
+        units.pop();
+        if(problema==10)
+        printclauses();
+        for(int i=0;i<clauses.size() && sat;i++){
+            if(i!=pos){//significa que está olhando uma clausula diferente da clausula de onde u foi copiada
+                erased=false;
+                for(int j=0;j<clauses[i].size() && !erased && sat;j++){
+                    if(clauses[i][j]==u){//se encontrar o proprio u dentro de outra clausula
+                        clauses.erase(clauses.begin()+i);//apaga clausula cujo indice é i
+                        erased=true;//para o loop
+                        if(pos>i)
+                            pos--;//reposiciona clausula unitaria atual
+                        i=0;
+                    }else if(clauses[i][j]==-u && clauses[i].size()>1){
+                        clauses[i].erase(clauses[i].begin()+j);//apaga variavel negada
+                        j=0;
+                        if(clauses[i].size()==1){//virou clausula unitaria
+                            units.push(i);//coloca clausula unitaria na fila
+                        }
+
+                    }else if(clauses[i][j]==-u){//quer dizer q existem as clausulas (u)&(-u)
+                        sat=false;//para o loop
+                    }
+                }
+            }
+        }
+    }
+    if(clauses.empty())
+        sat=false;
+
+    return sat;
+
+
 }
 void printclauses(){//print in console and in Resolucao.out
     for(int i=0;i<clausesQuantity;i++){

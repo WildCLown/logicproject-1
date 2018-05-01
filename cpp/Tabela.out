@@ -1,3 +1,10 @@
- (P > ((~Q) < (Q < S)))
- (P & (~P))
- (R v (~Q))
+Problema #2
+ S
+Problema #4
+ (P v P)
+Problema #6
+ (((S v S) < P) & (~R))
+Problema #15
+ (~((~(R & R)) v R))
+Problema #19
+ (~(~S))

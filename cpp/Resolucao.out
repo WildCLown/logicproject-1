@@ -1,17 +1,89 @@
- (P v ~P v (~S > ~Q) v ~R) & (~R v ~Q) & (~P v (Q > ~R))
+Problema #1
+Não, não é satisfatível.
+
+Problema #3
 Não está na FNC.
- (P v ~Q) & (Q v ~R) & (~P) & (~R)
-1 -2 
-2 -3 
--1 
--3 
 
- (P v ~S) & (~P) & (S)
-1 -4 
--1 
+Problema #5
+Não está na FNC.
+
+Problema #7
+Nem todas as cláusulas são de Horn.
+
+Problema #8
+Sim, é satisfatível.
+
+Problema #9
+Não está na FNC.
+
+Problema #10
 4 
+-2 -4 -2 
+-4 -1 1 
+-2 3 -1 -4 
+1 -4 
+1 -3 -2 -2 -1 
+4 -3 
+3 
+-4 2 -4 -1 -2 
+3 -3 -2 -1 -1 
+2 -2 -2 -1 -4 
+4 
+4 -1 -3 -4 -2 
 
- (P v Q v R) & (~P v ~R)
-Nem todas as cláusulas são de horn.
-  (P v Q v R)     & (   ~P v ~R) & (S)
-Nem todas as cláusulas são de horn.
+4 
+-2 -2 
+-1 1 
+-2 3 -1 
+1 
+1 -3 -2 -2 -1 
+3 
+2 -1 -2 
+3 -3 -2 -1 -1 
+2 -2 -2 -1 
+
+
+
+
+Não, não é satisfatível.
+
+Problema #11
+Não está na FNC.
+
+Problema #12
+Não está na FNC.
+
+Problema #13
+Sim, é satisfatível.
+
+Problema #14
+Não, não é satisfatível.
+
+Problema #16
+Não está na FNC.
+
+Problema #17
+Não, não é satisfatível.
+
+Problema #18
+Não está na FNC.
+
+Problema #20
+Não está na FNC.
+
+Problema #21
+Não está na FNC.
+
+Problema #22
+Não, não é satisfatível.
+
+Problema #23
+Não está na FNC.
+
+Problema #24
+Não está na FNC.
+
+Problema #25
+Não está na FNC.
+
+Problema #26
