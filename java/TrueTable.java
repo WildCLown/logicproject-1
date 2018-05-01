@@ -106,7 +106,7 @@ public class TrueTable {
 			control--;
 		}
 		System.out.print("| ");
-		quicksort(ClauseComplexityOrder);
+		booble(ClauseComplexityOrder);
 		for (int i = 0; i < ClauseComplexityOrder.length; i++) {
 			if (ClauseComplexityOrder[i].length() > 1) {
 				if (i + 1 < ClauseComplexityOrder.length) {
@@ -376,7 +376,26 @@ public class TrueTable {
 						answer = equivalent(check[S], true);
 					}
 				} else {
-					answer = 0;
+					int first = 0, second = 0; // Para poder associar a seu devido index em check, e realizar o metodo
+					if (Clause.charAt(0) == 'P') {
+						first = P;
+					} else if (Clause.charAt(0) == 'Q') {
+						first = Q;
+					} else if (Clause.charAt(0) == 'R') {
+						first = R;
+					} else if (Clause.charAt(0) == 'S') {
+						first = S;
+					}
+					if (Clause.charAt(4) == 'P') {
+						second = P;
+					} else if (Clause.charAt(4) == 'Q') {
+						second = Q;
+					} else if (Clause.charAt(4) == 'R') {
+						second = R;
+					} else if (Clause.charAt(4) == 'S') {
+						second = S;
+					}
+					answer = equivalent(check[first], check[second]);
 				}
 			}
 		}
@@ -443,39 +462,28 @@ public class TrueTable {
 	}
 
 	// Métodos Já ensinados em sala.
-	public static void quicksort(String[] array) {
-		sort(array, 0, array.length - 1);
-	}
-
-	public static void sort(String[] array, int beg, int end) {
-		if (beg < end) {
-			int j = separar(array, beg, end);
-			sort(array, beg, j - 1);
-			sort(array, j + 1, end);
+	private static void booble(String[] array) {
+		int[] sortaux = new int[array.length];
+		for (int i = 0; i < array.length; i++) {
+			sortaux[i] = array[i].length();
 		}
+		sort(array, sortaux);
 	}
 
-	private static int separar(String[] array, int beg, int end) {
-		int i = beg, j = end;
-		while (i < j) {
-			while (i < end && array[i].length() <= array[beg].length())
-				i++;
-			while (j > beg && array[j].length() >= array[beg].length())
-				j--;
-			if (i < j) {
-				trocar(array, i, j);
-				i++;
-				j--;
+	private static void sort(String[] array, int[] sortaux) {
+		for (int i = 0; i < array.length; ++i) {
+			for (int j = 0; j < array.length; ++j) {
+				if (sortaux[j] >= sortaux[i]) {
+					int aux = sortaux[i];
+					String aux2 = array[i];
+					sortaux[i] = sortaux[j];
+					sortaux[j] = aux;
+					array[i] = array[j];
+					array[j] = aux2;
+
+				}
 			}
 		}
-		trocar(array, beg, j);
-		return j;
-	}
-
-	private static void trocar(String[] array, int i, int j) {
-		String aux = array[i];
-		array[i] = array[j];
-		array[j] = aux;
 
 	}
 }
