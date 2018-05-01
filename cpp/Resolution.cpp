@@ -3,15 +3,15 @@ using namespace std;
 //resolution functions and global variables/////////////////
 int isFNC(string frase);
 int encode(char literal);
-bool getClauses(string frase);
-void printclauses();
-bool solveHorn();
-string metod,frase;
-fstream input,truetable,resolution;//variaveis para o imput e o output
-int t,clausesQuantity,problema;
-vector <vector<int>> clauses;
+bool getClauses(string frase,int clausesQuantity,vector <vector<int>> clauses);
+void printclauses(fstream resolution, int clausesQuantity,vector <vector<int>> clauses);
+bool solveHorn(vector <vector<int>> clauses);
 /////////////////////////////////////////////////////////////////////////////
 int main(){
+    vector <vector<int>> clauses;
+    int t,clausesQuantity,problema=0;
+    string metod,frase;
+    fstream input,truetable,resolution;//variaveis para o input e o output
     input.open("Entrada.in");
     truetable.open("Tabela.out");
     resolution.open("Resolucao.out");
@@ -34,12 +34,12 @@ int main(){
             if(clausesQuantity==-1){
                 resolution<<"Não está na FNC.\n\n";
             }else{
-                if(!getClauses(frase)){
+                if(!getClauses(frase,clausesQuantity,clauses)){
                     resolution<<"Nem todas as cláusulas são de Horn.\n\n";
                 }else{
                     //solve here
                     //printclauses();
-                    if(solveHorn()){
+                    if(solveHorn(clauses)){
                        resolution<<"Sim, é satisfatível.\n\n"; 
                     }else{
                         resolution<<"Não, não é satisfatível.\n\n";
@@ -74,7 +74,7 @@ int isFNC(string frase){
         }
     }
     return q;
-}
+}//////////ok
 
 int encode(char literal){
     if(literal=='P')
@@ -85,8 +85,9 @@ int encode(char literal){
         return 3;
     if(literal =='S')
         return 4;
-}
-bool getClauses(string frase){//pega clausulas, poe no vector e retorna false de alguma das clausulas nao for de horn
+}//////////ok
+
+bool getClauses(string frase,int clausesQuantity,vector <vector<int>> clauses){//pega clausulas, poe no vector e retorna false de alguma das clausulas nao for de horn
     char c;
     int contador;
     stringstream frasestream(frase);
@@ -120,8 +121,8 @@ bool getClauses(string frase){//pega clausulas, poe no vector e retorna false de
     }
 
 return true;
-}
-bool solveHorn(){
+}///////////////ok
+bool solveHorn(vector <vector<int>> clauses){
     queue <int> units;//guarda indices de clausulas unitarias
     bool sat=true,erased;
     for(int i=0;i<clauses.size();i++){
@@ -164,8 +165,9 @@ bool solveHorn(){
     return sat;
 
 
-}
-void printclauses(){//print in console and in Resolucao.out
+}//////////////////////////////ok
+
+void printclauses(fstream resolution,int clausesQuantity,vector <vector<int>> clauses){//print in console and in Resolucao.out
     for(int i=0;i<clausesQuantity;i++){
         for(int j=0;j<clauses[i].size() && !clauses[i].empty();j++){
             cout<<clauses[i][j]<<" ";

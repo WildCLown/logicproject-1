@@ -8,3 +8,108 @@ Problema #15
  (~((~(R & R)) v R))
 Problema #19
  (~(~S))
+Problema #55
+ ((~R) > ((((Q & Q) < (~P)) > Q) < ((P > S) < ((Q & R) < P))))
+Problema #56
+ ((Q > S) > (~R))
+Problema #57
+ (S > Q)
+Problema #58
+ ((~(P v ((P > R) < (P > R)))) < Q)
+Problema #59
+ R
+Problema #60
+ ((S > Q) v (P < (R < P)))
+Problema #61
+ ((((Q v Q) v (Q & Q)) & (P > (R & P))) > (((Q v Q) v (Q & Q)) & (P > (R & P))))
+Problema #62
+ ((S > ((Q < P) v R)) < (~R))
+Problema #63
+ ((R & (((P < R) < (P < R)) > (P < R))) v ((R & (((P < R) < (P < R)) > (P < R))) v (R & (((P < R) < (P < R)) > (P < R)))))
+Problema #64
+ (S > ((~P) < Q))
+Problema #65
+ (~P)
+Problema #66
+ (P > R)
+Problema #67
+ (Q v S)
+Problema #68
+ (~((R < S) v (P & S)))
+Problema #69
+ ((S & (P > (P & Q))) & (~P))
+Problema #70
+ ((((S > Q) > P) & R) & (Q > (R > Q)))
+Problema #71
+ ((R > ((~S) > (~S))) < ((R & R) & (~S)))
+Problema #72
+ ((((P > R) v Q) & Q) v P)
+Problema #73
+ (((Q & Q) > S) v S)
+Problema #74
+ ((~Q) & (((~Q) > (R < Q)) > P))
+Problema #75
+ ((~Q) v (P & Q))
+Problema #76
+ ((((R & (((Q < P) & S) v P)) & ((S < S) < R)) > (P & (((S < S) < R) < P))) & ((S < S) < R))
+Problema #77
+ ((R > P) v Q)
+Problema #78
+ ((~(~P)) & R)
+Problema #79
+ (((~P) v ((S < (S v Q)) & ((~P) & S))) & Q)
+Problema #80
+ (S > (~P))
+Problema #81
+ (((~Q) > (R > Q)) < R)
+Problema #82
+ (((~(~Q)) v (((~Q) v R) > ((~Q) v R))) & R)
+Problema #83
+ ((~R) & P)
+Problema #84
+ (~(S > P))
+Problema #85
+ (S < Q)
+Problema #86
+ ((~(~Q)) > (R < (S & S)))
+Problema #87
+ (R v P)
+Problema #88
+ ((S > S) > P)
+Problema #89
+ (~((R v Q) & R))
+Problema #90
+ ((((~R) & (~Q)) > P) > R)
+Problema #91
+ (S > Q)
+Problema #92
+ ((((~R) < S) & (S & (~S))) > (S < S))
+Problema #93
+ P
+Problema #94
+ ((R < S) < ((R < S) v S))
+Problema #95
+ (Q v ((~R) & R))
+Problema #96
+ (((~(~S)) & R) v (R > (~S)))
+Problema #97
+ (S > P)
+Problema #98
+ (~(S & P))
+Problema #99
+ (~R)
+S & (~S))) > (S < S))
+Problema #6291586
+ P
+Problema #6291587
+ ((R < S) < ((R < S) v S))
+Problema #6291588
+ (Q v ((~R) & R))
+Problema #6291589
+ (((~(~S)) & R) v (R > (~S)))
+Problema #6291590
+ (S > P)
+Problema #6291591
+ (~(S & P))
+Problema #6291592
+ (~R)
