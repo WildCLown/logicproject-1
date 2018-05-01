@@ -6,14 +6,21 @@ public class TrueTable {
 		Scanner leia = new Scanner(System.in);
 		int i = leia.nextInt();
 		leia.nextLine();
-		while (i != 0) {
-			i--;
+		for (int j = 0; j < i; j++) {
 			String Command = leia.nextLine();
 			String clause = Command.substring(3);
 			if (Command.substring(0, 2).equals("TT")) {
+				System.out.println("Problema #" + (j + 1));
 				String[] Array = GenerateInterface(clause);
-				boolean[] PQRS = checkClauses(Array);
-				doSolve(PQRS, Array);
+				if (Array.length == 1) {
+					System.out.println("0 |");
+					System.out.println("1 |");
+					System.out.println("Sim, é satisfatível.");
+				} else {
+					boolean[] PQRS = checkClauses(Array);
+					doSolve(PQRS, Array);
+				}
+				System.out.println();
 			} else {
 			}
 		}
@@ -194,6 +201,16 @@ public class TrueTable {
 		}
 		int size = Clause.length() - 1;
 		int answer = 0;
+
+		if (Clause.contains("(")) {
+			boolean controlled = false;
+			while (!controlled) {
+				Clause = changeClause(Clause, ClauseAnswer, index - 1, Clauses);
+				if (Clause.length() <= 5) {
+					controlled = true;
+				}
+			}
+		}
 		if (Clause.length() == 2) {
 			if (Clause.charAt(1) == 'P') {
 				answer = not(check[P]);
@@ -203,21 +220,18 @@ public class TrueTable {
 				answer = not(check[R]);
 			} else if (Clause.charAt(1) == 'S') {
 				answer = not(check[S]);
-			}
-		}
-		if (Clause.length() > 5) {
-			boolean controlled = false;
-			while (!controlled) {
-				Clause = changeClause(Clause, ClauseAnswer, index - 1, Clauses);
-				if (Clause.length() == 5) {
-					controlled = true;
-				}
+			} else if (Clause.charAt(1) == '0') {
+				answer = 1;
+			} else if (Clause.charAt(1) == '1') {
+				answer = 0;
 			}
 		}
 		if (Clause.length() == 5) {
 			if (Clause.charAt(2) == '&') { // para poder checar sua devida operação, em uma string de lenght 5, seu
 											// operador está no 2, então é possível associar sua devida operação
-				if (Clause.charAt(0) == '1' || Clause.charAt(4) == '1') {
+				if (Clause.charAt(0) == '1' && Clause.charAt(4) == '1') {
+					answer = 1;
+				} else if (Clause.charAt(0) == '1' || Clause.charAt(4) == '1') {
 					if (Clause.charAt(0) == 'P' || Clause.charAt(4) == 'P') {
 						answer = and(check[P], true);
 					} else if (Clause.charAt(0) == 'Q' || Clause.charAt(4) == 'Q') {
@@ -252,11 +266,118 @@ public class TrueTable {
 					answer = and(check[first], check[second]);
 				}
 			} else if (Clause.charAt(2) == 'v') {
-
+				if (Clause.charAt(0) == '1' || Clause.charAt(4) == '1') {
+					answer = 1;
+				} else if (Clause.charAt(0) == '0' && Clause.charAt(4) == '0') {
+					answer = 0;
+				} else if (Clause.charAt(0) == '0' || Clause.charAt(4) == '0') {
+					if (Clause.charAt(0) == 'P' || Clause.charAt(4) == 'P') {
+						answer = or(check[P], false);
+					} else if (Clause.charAt(0) == 'Q' || Clause.charAt(4) == 'Q') {
+						answer = or(check[Q], false);
+					} else if ((Clause.charAt(0) == 'R' || Clause.charAt(4) == 'R')) {
+						answer = or(check[R], false);
+					} else if (Clause.charAt(0) == 'S' || Clause.charAt(4) == 'S') {
+						answer = or(check[S], false);
+					}
+				} else {
+					int first = 0, second = 0; // Para poder associar a seu devido index em check, e realizar o metodo
+					if (Clause.charAt(0) == 'P') {
+						first = P;
+					} else if (Clause.charAt(0) == 'Q') {
+						first = Q;
+					} else if (Clause.charAt(0) == 'R') {
+						first = R;
+					} else if (Clause.charAt(0) == 'S') {
+						first = S;
+					}
+					if (Clause.charAt(4) == 'P') {
+						second = P;
+					} else if (Clause.charAt(4) == 'Q') {
+						second = Q;
+					} else if (Clause.charAt(4) == 'R') {
+						second = R;
+					} else if (Clause.charAt(4) == 'S') {
+						second = S;
+					}
+					answer = or(check[first], check[second]);
+				}
 			} else if (Clause.charAt(2) == '>') {
+				if (Clause.charAt(0) == '0' || Clause.charAt(4) == '1') {
+					answer = 1;
+				} else if (Clause.charAt(0) == '1') {
+					if (Clause.charAt(4) == 'P') {
+						answer = implication(true, check[P]);
+					} else if (Clause.charAt(4) == 'Q') {
+						answer = implication(true, check[Q]);
+					} else if (Clause.charAt(4) == 'R') {
+						answer = implication(true, check[R]);
+					} else if (Clause.charAt(4) == 'S') {
+						answer = implication(true, check[S]);
+					} else if (Clause.charAt(4) == '1') {
+						answer = 1;
+					}
 
+				} else if (Clause.charAt(4) == '0') {
+					if (Clause.charAt(0) == 'P') {
+						answer = implication(check[P], false);
+					} else if (Clause.charAt(0) == 'Q') {
+						answer = implication(check[Q], false);
+					} else if (Clause.charAt(0) == 'R') {
+						answer = implication(check[R], false);
+					} else if (Clause.charAt(0) == 'S') {
+						answer = implication(check[S], false);
+					}
+
+				} else {
+					int first = 0, second = 0; // Para poder associar a seu devido index em check, e realizar o metodo
+					if (Clause.charAt(0) == 'P') {
+						first = P;
+					} else if (Clause.charAt(0) == 'Q') {
+						first = Q;
+					} else if (Clause.charAt(0) == 'R') {
+						first = R;
+					} else if (Clause.charAt(0) == 'S') {
+						first = S;
+					}
+					if (Clause.charAt(4) == 'P') {
+						second = P;
+					} else if (Clause.charAt(4) == 'Q') {
+						second = Q;
+					} else if (Clause.charAt(4) == 'R') {
+						second = R;
+					} else if (Clause.charAt(4) == 'S') {
+						second = S;
+					}
+					answer = implication(check[first], check[second]);
+				}
 			} else if (Clause.charAt(2) == '<') {
-
+				if ((Clause.charAt(0) == '0' && Clause.charAt(4) == '0')
+						|| (Clause.charAt(0) == '1' && Clause.charAt(4) == '1')) {
+					answer = 1;
+				} else if (Clause.charAt(0) == '0' || Clause.charAt(4) == '0') {
+					if (Clause.charAt(0) == 'P' || Clause.charAt(4) == 'P') {
+						answer = equivalent(check[P], false);
+					} else if (Clause.charAt(0) == 'Q' || Clause.charAt(4) == 'Q') {
+						answer = equivalent(check[Q], false);
+					} else if ((Clause.charAt(0) == 'R' || Clause.charAt(4) == 'R')) {
+						answer = equivalent(check[R], false);
+					} else if (Clause.charAt(0) == 'S' || Clause.charAt(4) == 'S') {
+						answer = equivalent(check[S], false);
+					}
+				} else if (Clause.charAt(0) == '1' || Clause.charAt(4) == '1') {
+					if (Clause.charAt(0) == 'P' || Clause.charAt(4) == 'P') {
+						answer = equivalent(check[P], true);
+					} else if (Clause.charAt(0) == 'Q' || Clause.charAt(4) == 'Q') {
+						answer = equivalent(check[Q], true);
+					} else if ((Clause.charAt(0) == 'R' || Clause.charAt(4) == 'R')) {
+						answer = equivalent(check[R], true);
+					} else if (Clause.charAt(0) == 'S' || Clause.charAt(4) == 'S') {
+						answer = equivalent(check[S], true);
+					}
+				} else {
+					answer = 0;
+				}
 			}
 		}
 
@@ -269,10 +390,13 @@ public class TrueTable {
 
 	private static String changeClause(String clause, int[] clauseAnswer, int i, String[] Clauses) {
 		String theClause = "";
-		for (int j = i; j >= 0; j--) {
+		String aux = "";
+		boolean found = false;
+		for (int j = i; j >= 0 && !found; j--) {
 			if (clause.contains("(" + Clauses[j] + ")")) {
-				Clauses[i] = "(" + Clauses[j] + ")";
-				theClause = clause.replace(Clauses[j], Integer.toString(clauseAnswer[j]));
+				aux = "(" + Clauses[j] + ")";
+				theClause = clause.replace(aux, Integer.toString(clauseAnswer[j]));
+				found = true;
 			}
 		}
 		return theClause;
