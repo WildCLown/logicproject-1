@@ -8,7 +8,7 @@ void printclauses(fstream resolution, int clausesQuantity,vector <vector<int>> c
 bool solveHorn(vector <vector<int>> clauses);
 /////////////////////////////////////////////////////////////////////////////
 int main(){
-    vector <vector<int>> clauses;
+    vector <vector<int>> clauses;//lista de lista de int
     int t,clausesQuantity,problema=0;
     string metod,frase;
     fstream input,truetable,resolution;//variaveis para o input e o output
