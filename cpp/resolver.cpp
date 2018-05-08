@@ -1,10 +1,10 @@
-#include <bits/stdc++.h>
-// #include <vector>
-// #include <queue>
-// #include <string>
-// #include <iostream>
-// #include <fstream>
-// #include <sstream>
+ #include <vector>
+ #include <queue>
+ #include <string>
+ #include <iostream>
+ #include <fstream>
+ #include <sstream>
+
 using namespace std;
 
 int isFNC(string frase);
@@ -30,29 +30,26 @@ int main(){
         
         input>>metod;//pega TT ou RE
         getline(input, frase);//pega expressao na linha
+        
         if(metod=="TT"){
             //faz nada, pois será feito via TrueTable.java
 
         }else{//RE
+        //resolution<<frase<<endl;
             
             resolution<<"Problema #"<<problema<<endl;
             clausesQuantity = isFNC(frase);//retorna quantidade de clausulas ou -1 se nao estiver na FNC
             if(clausesQuantity==-1){
-                resolution<<"Não está na FNC.\n";
-                
+                resolution<<"Não está na FNC.\n\n";
             }else{
                 if(!getClauses(frase)){
-                    resolution<<"Nem todas as cláusulas são de Horn.\n";
-                    
+                    resolution<<"Nem todas as cláusulas são de Horn.\n\n";
                 }else{
-                   
                     //printclauses();//debug line
                     if(solveHorn()){
-                       resolution<<"Sim, é satisfatível.\n"; 
-                       
+                       resolution<<"Sim, é satisfatível.\n\n"; 
                     }else{
-                        resolution<<"Não, não é satisfatível.\n";
-                        
+                        resolution<<"Não, não é satisfatível.\n\n";
                     }   
                 } 
             }
@@ -70,7 +67,7 @@ int isFNC(string frase){
     int lv=0;//significa o quao dentro da expressao original o algoritmo está
     for(int i=0;i<frase.size();i++){
         if(frase[i]==' '){
-            //do nothing
+            //ignora
         }else if(frase[i]=='('){
             lv++;
         }else if(frase[i]==')'){//conta uma clausula
@@ -148,7 +145,7 @@ bool solveHorn(){
         
         int u = units.front();//literal de clausula unitaria
         units.pop();
-        //if(problema==49)//choose problem to debug
+        //if(problema==100)//choose problem to debug
         //printclauses();//for debug purposes
         for(int i=0;i<clauses.size() && sat;i++){
             if(clauses[i].size()!=1 || (clauses[i].size()==1 && clauses[i][0]!=u)){//significa que está olhando uma clausula diferente da clausula de onde u foi copiada

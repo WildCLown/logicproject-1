@@ -32,20 +32,20 @@ int main(){
             resolution<<"Problema #"<<problema<<endl;
             clausesQuantity = isFNC(frase);//retorna quantidade de clausulas ou -1 se nao estiver na FNC
             if(clausesQuantity==-1){
-                resolution<<"Não está na FNC.\n";
+                resolution<<"Não está na FNC.\n\n";
                 
             }else{
                 if(!getClauses(frase)){
-                    resolution<<"Nem todas as cláusulas são de Horn.\n";
+                    resolution<<"Nem todas as cláusulas são de Horn.\n\n";
                     
                 }else{
                    
                     //printclauses();//debug line
                     if(solveHorn()){
-                       resolution<<"Sim, é satisfatível.\n"; 
+                       resolution<<"Sim, é satisfatível.\n\n"; 
                        
                     }else{
-                        resolution<<"Não, não é satisfatível.\n";
+                        resolution<<"Não, não é satisfatível.\n\n";
                         
                     }   
                 } 
