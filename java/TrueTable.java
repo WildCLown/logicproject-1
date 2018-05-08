@@ -109,11 +109,7 @@ public class TrueTable {
 		booble(ClauseComplexityOrder);
 		for (int i = 0; i < ClauseComplexityOrder.length; i++) {
 			if (ClauseComplexityOrder[i].length() > 1) {
-				if (i + 1 < ClauseComplexityOrder.length) {
 					System.out.print(ClauseComplexityOrder[i] + "  ");
-				} else {
-					System.out.print(ClauseComplexityOrder[i]);
-				}
 			}
 		}
 		System.out.println();
@@ -130,7 +126,7 @@ public class TrueTable {
 		}
 		boolean check[] = new boolean[i];
 		int k = (int) Math.pow(2, i); // o total de vezes que devo checar, para ter todas as opções
-		boolean sat = false;
+		boolean isSat = false;
 		for (int j = 0; j < k; j++) {
 			for (int pei = 0; pei < i; pei++) { // somente dar as possibilidades, apresentando na interface
 				if (check[pei]) {
@@ -151,8 +147,9 @@ public class TrueTable {
 				if (index < Clause.length - 1) {
 					System.out.print("  ");
 				} else {
+					System.out.print(" ");
 					if (satAnswer == 1) {
-						sat = true;
+						isSat = true;
 					}
 				}
 
@@ -169,7 +166,7 @@ public class TrueTable {
 					}
 				}
 			} else {
-				if (sat) {
+				if (isSat) {
 					System.out.println("Sim, é satisfatível.");
 				} else {
 					System.out.println("Não, não é satisfatível.");
