@@ -109,7 +109,7 @@ public class TrueTable {
 		booble(ClauseComplexityOrder);
 		for (int i = 0; i < ClauseComplexityOrder.length; i++) {
 			if (ClauseComplexityOrder[i].length() > 1) {
-					System.out.print(ClauseComplexityOrder[i] + "  ");
+				System.out.print(ClauseComplexityOrder[i] + "  ");
 			}
 		}
 		System.out.println();
@@ -127,6 +127,7 @@ public class TrueTable {
 		boolean check[] = new boolean[i];
 		int k = (int) Math.pow(2, i); // o total de vezes que devo checar, para ter todas as opções
 		boolean isSat = false;
+		boolean isRef = false;
 		for (int j = 0; j < k; j++) {
 			for (int pei = 0; pei < i; pei++) { // somente dar as possibilidades, apresentando na interface
 				if (check[pei]) {
@@ -150,6 +151,8 @@ public class TrueTable {
 					System.out.print(" ");
 					if (satAnswer == 1) {
 						isSat = true;
+					} else {
+						isRef = true;
 					}
 				}
 
@@ -167,9 +170,24 @@ public class TrueTable {
 				}
 			} else {
 				if (isSat) {
-					System.out.println("Sim, é satisfatível.");
+					System.out.print("Sim, é satisfatível. | ");
 				} else {
-					System.out.println("Não, não é satisfatível.");
+					System.out.print("Não, não é satisfatível. | ");
+				}
+				if (isRef) {
+					System.out.print("Sim, é refutável. | ");
+				} else {
+					System.out.print("Não, não é refutável. | ");
+				}
+				if (!isSat) {
+					System.out.print("Sim, é insatisfativel. | ");
+				} else {
+					System.out.print("Não, não é insatisfativel. | ");
+				}
+				if (!isRef) {
+					System.out.println("Sim, é tautologia.");
+				} else {
+					System.out.println("Não, não é tautologia.");
 				}
 			}
 		}
@@ -455,6 +473,14 @@ public class TrueTable {
 			return 1;
 		} else {
 			return 0;
+		}
+	}
+
+	private static int Xor(boolean var1, boolean var2) {
+		if (equivalent(var1, var2) == 1) {
+			return 0;
+		} else {
+			return 1;
 		}
 	}
 
