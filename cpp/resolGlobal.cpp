@@ -15,31 +15,36 @@ vector <vector<int>> clauses;
 int main(){
     input.open("Entrada.in");
     resolution.open("Resolucao.out");
-    //agora consigo usar input, truetable e resolution p/ input e output
+    //agora consigo usar input, resolution p/ input e output
     
     input>>t;//pega quantidade de casos testes
-    while(t--){//roda t vezes
-        problema++;
+    for(problema=1;problema<=t;problema++){//roda t vezes
+        
         input>>metod;//pega TT ou RE
         getline(input, frase);//pega o resto da linha
-		cout<<frase<<endl;//debug line
         if(metod=="TT"){
+
         }else{//RE
             
+		    //cout<<frase<<endl;//debug line
             resolution<<"Problema #"<<problema<<endl;
             clausesQuantity = isFNC(frase);//retorna quantidade de clausulas ou -1 se nao estiver na FNC
             if(clausesQuantity==-1){
-                resolution<<"Não está na FNC.\n\n";
+                resolution<<"Não está na FNC.\n";
+                
             }else{
                 if(!getClauses(frase)){
-                    resolution<<"Nem todas as cláusulas são de Horn.\n\n";
+                    resolution<<"Nem todas as cláusulas são de Horn.\n";
+                    
                 }else{
                     //solve here
                     //printclauses();
                     if(solveHorn()){
-                       resolution<<"Sim, é satisfatível.\n\n"; 
+                       resolution<<"Sim, é satisfatível.\n"; 
+                       
                     }else{
-                        resolution<<"Não, não é satisfatível.\n\n";
+                        resolution<<"Não, não é satisfatível.\n";
+                        
                     }
                     
                 }
@@ -47,6 +52,7 @@ int main(){
                 
             }
         }
+         
     }
     return 0;
 }
