@@ -1,4 +1,10 @@
 #include <bits/stdc++.h>
+// #include <vector>
+// #include <queue>
+// #include <string>
+// #include <iostream>
+// #include <fstream>
+// #include <sstream>
 using namespace std;
 
 int isFNC(string frase);
