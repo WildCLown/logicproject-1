@@ -11,5 +11,5 @@ java TrueTable <Entrada.in>Tabela.out
 ##Tabela.out completa
 
 g++ resolver.cpp -std=c++11
-./a.out <Entrada.in>Resolucao.out
+./a.out 
 ##Resolucao.out completa
