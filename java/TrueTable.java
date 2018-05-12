@@ -412,6 +412,52 @@ public class TrueTable {
 					}
 					answer = equivalent(check[first], check[second]);
 				}
+			} else if (Clause.charAt(2) == 'X') {
+				if ((Clause.charAt(0) == '0' && Clause.charAt(4) == '0')
+						|| (Clause.charAt(0) == '1' && Clause.charAt(4) == '1')) {
+					answer = 0;
+				} else if (Clause.charAt(0) == '0' || Clause.charAt(4) == '0') {
+					if (Clause.charAt(0) == 'P' || Clause.charAt(4) == 'P') {
+						answer = Xor(check[P], false);
+					} else if (Clause.charAt(0) == 'Q' || Clause.charAt(4) == 'Q') {
+						answer = Xor(check[Q], false);
+					} else if ((Clause.charAt(0) == 'R' || Clause.charAt(4) == 'R')) {
+						answer = Xor(check[R], false);
+					} else if (Clause.charAt(0) == 'S' || Clause.charAt(4) == 'S') {
+						answer = Xor(check[S], false);
+					}
+				} else if (Clause.charAt(0) == '1' || Clause.charAt(4) == '1') {
+					if (Clause.charAt(0) == 'P' || Clause.charAt(4) == 'P') {
+						answer = Xor(check[P], true);
+					} else if (Clause.charAt(0) == 'Q' || Clause.charAt(4) == 'Q') {
+						answer = Xor(check[Q], true);
+					} else if ((Clause.charAt(0) == 'R' || Clause.charAt(4) == 'R')) {
+						answer = Xor(check[R], true);
+					} else if (Clause.charAt(0) == 'S' || Clause.charAt(4) == 'S') {
+						answer = Xor(check[S], true);
+					}
+				} else {
+					int first = 0, second = 0; // Para poder associar a seu devido index em check, e realizar o metodo
+					if (Clause.charAt(0) == 'P') {
+						first = P;
+					} else if (Clause.charAt(0) == 'Q') {
+						first = Q;
+					} else if (Clause.charAt(0) == 'R') {
+						first = R;
+					} else if (Clause.charAt(0) == 'S') {
+						first = S;
+					}
+					if (Clause.charAt(4) == 'P') {
+						second = P;
+					} else if (Clause.charAt(4) == 'Q') {
+						second = Q;
+					} else if (Clause.charAt(4) == 'R') {
+						second = R;
+					} else if (Clause.charAt(4) == 'S') {
+						second = S;
+					}
+					answer = Xor(check[first], check[second]);
+				}
 			}
 		}
 
