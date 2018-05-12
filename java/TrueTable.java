@@ -416,6 +416,9 @@ public class TrueTable {
 				if ((Clause.charAt(0) == '0' && Clause.charAt(4) == '0')
 						|| (Clause.charAt(0) == '1' && Clause.charAt(4) == '1')) {
 					answer = 0;
+				} else if ((Clause.charAt(0) == '0' && Clause.charAt(4) == '1')
+						|| (Clause.charAt(0) == '1' && Clause.charAt(4) == '0')) {
+					answer = 1;
 				} else if (Clause.charAt(0) == '0' || Clause.charAt(4) == '0') {
 					if (Clause.charAt(0) == 'P' || Clause.charAt(4) == 'P') {
 						answer = Xor(check[P], false);
